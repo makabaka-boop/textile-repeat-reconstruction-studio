@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # 可选：在容器内运行 Vitest，验证周期判定
+  #   docker compose --profile test run --rm test
+  test:
+    build:
+      context: .
+      target: build
+    command: npm test
+    profiles: ["test"]
